@@ -1,0 +1,101 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Loggregate</title>
+        <style>
+         body {
+             padding: 1% 10%;
+         }
+         .page-header {
+             display: flex;
+             justify-content: center;
+             padding-bottom: 15px;
+         }
+         .page-title {
+             font-size: 60px;
+             margin: 0;
+         }
+         section {
+             margin-bottom: 2rem;
+         }
+         .combined-logs-sec, .time-trend-sec {
+             display: flex;
+             justify-content: center;
+         }
+         .combined-logs, .time-trend {
+             width: 80%;
+         }
+         .combined-logs > h2, .combined-logs > p, .time-trend > h2, .time-trend > p {
+             text-align: center;
+         }
+         img.plot {
+             width: 100%;
+             border: 1px black solid;
+         }
+         .trend-plot-container > .plot {
+             margin: 1rem 0;
+         }
+         .trend-plot-container > .hide {
+             display: none;
+         }
+         footer > p {
+             text-align: end;
+         }
+        </style>
+    </head>
+    <body>
+        <header class="page-header">
+            <h1 class="page-title">Loggregate Report</h1>
+        </header>
+        <hr />
+        <section>
+            <section class="combined-logs-sec">
+                <div class="combined-logs">
+                    <h2>Log Analysis</h2>
+                    <p>Read <b>{#NO_OF_FILES#}</b> file(s) and <b>{#NO_OF_LOGS#}</b> log(s).</p>
+                    <p>These are the number of logs occured over the duration of given log files.</p>
+                    <details>
+                        <summary> Expand to see detailed numbers </summary>
+                        <ul>
+                            <li>Emergency: <b>{#NO_OF_EMERGENCY#}</b></li>
+                            <li>Alert: <b>{#NO_OF_ALERT#}</b></li>
+                            <li>Critical: <b>{#NO_OF_CRITICAL#}</b></li>
+                            <li>Error: <b>{#NO_OF_ERROR#}</b></li>
+                            <li>Warning: <b>{#NO_OF_WARNING#}</b></li>
+                            <li>Notice: <b>{#NO_OF_NOTICE#}</b></li>
+                            <li>Info: <b>{#NO_OF_INFO#}</b></li>
+                            <li>Debug: <b>{#NO_OF_DEBUG#}</b></li>
+                            <li>Others: <b>{#NO_OF_OTHERS#}</b></li>
+                        </ul>
+                    </details>
+                    <img class="plot combined-plot" alt="" src="plots/combined.png" />
+                </div>
+            </section>
+            <hr />
+            <section class="time-trend-sec">
+                <div class="time-trend">
+                    <h2>Log trends over time</h2>
+                    <p>Log trends of different Log level types over time during the duration of logs are presented below</p>
+                    <div class="trend-plot-container">
+                        <img class="plot {#EMERGENCY_VISIBILITY#}" alt="" src="plots/emergency.png" />
+                        <img class="plot {#ALERT_VISIBILITY#}" alt="" src="plots/alert.png" />
+                        <img class="plot {#CRITICAL_VISIBILITY#}" alt="" src="plots/critical.png" />
+                        <img class="plot {#ERROR_VISIBILITY#}" alt="" src="plots/error.png" />
+                        <img class="plot {#WARNING_VISIBILITY#}" alt="" src="plots/warning.png" />
+                        <img class="plot {#NOTICE_VISIBILITY#}" alt="" src="plots/notice.png" />
+                        <img class="plot {#INFO_VISIBILITY#}" alt="" src="plots/info.png" />
+                        <img class="plot {#DEBUG_VISIBILITY#}" alt="" src="plots/debug.png" />
+                        <img class="plot {#OTHERS_VISIBILITY#}" alt="" src="plots/others.png" />
+                    </div>
+                </div>
+            </section>
+        </section>
+        <hr />
+        <footer>
+            <p>Created{#BY_USER#} using <a href="#">Loggregate</a>.</p>
+        </footer>
+    </body>
+</html>
