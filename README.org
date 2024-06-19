@@ -1,0 +1,25 @@
+* Loggregate
+
+Aggregates, Analyses and Generates reports from log files.
+
+Loggregate can read your log files given a glob pattern and generates a report with stats based on the logs.
+
+* Compile from source
+
++ You might need to install some basic packages for this tool to work mentioned in =requirements.txt=. They are mentioned with
+  software name (debian package name & arch linux package name)
+  #+BEGIN_SRC text
+    pkg-config (base-devel / build-essential)
+    libfreetype (freetype2 / libfreetype6-dev)
+    libfontconfig (fontconfig / libfontconfig-dev)
+  #+END_SRC
+
++ Make sure you have rust toolchain installed.
++ Clone this repository and ~cd~ into it.
++ Run ~cargo build~. You can use ~--release~ flag to make an optimized release build.
++ Compiled binary can be found inside =target= folder.
+
+* Usage
+
+You can get detailed usage by running =loggregate= with ~--help~ flag.
+
