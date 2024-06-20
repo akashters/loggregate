@@ -18,6 +18,7 @@ pub enum LogLevel {
 pub fn to_loglevel(loglevel: &str) -> LogLevel {
     return match loglevel.to_uppercase().as_str() {
         "INFO" => LogLevel::Info,
+        "INFORMATION" => LogLevel::Info,
         "DEBUG" => LogLevel::Debug,
         "WARNING" => LogLevel::Warning,
         "WARN" => LogLevel::Warning,
