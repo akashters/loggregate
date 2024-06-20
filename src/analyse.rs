@@ -76,37 +76,37 @@ pub fn analyse_logs(
     let logs_duration = maxdt.signed_duration_since(mindt.to_owned());
 
     if logs_duration.num_seconds() > YEAR_SECONDS {
-        println!("In terms of years");
+        println!("Analysing in terms of years...");
         let duration_years =
             u64::div_ceil(logs_duration.num_seconds() as u64, YEAR_SECONDS as u64) as i64;
 
         logs_aggregate = aggregate_in_terms_of_years(&log_data, mindt, maxdt, duration_years);
     } else if logs_duration.num_seconds() > MONTH_SECONDS {
-        println!("In terms of months");
+        println!("Analysing in terms of months...");
         let duration_months =
             u64::div_ceil(logs_duration.num_seconds() as u64, MONTH_SECONDS as u64) as i64;
 
         logs_aggregate = aggregate_in_terms_of_months(&log_data, mindt, maxdt, duration_months);
     } else if logs_duration.num_seconds() > DAY_SECONDS {
-        println!("In terms of days");
+        println!("Analysing in terms of days...");
         let duration_days =
             u64::div_ceil(logs_duration.num_seconds() as u64, DAY_SECONDS as u64) as i64;
 
         logs_aggregate = aggregate_in_terms_of_days(&log_data, mindt, maxdt, duration_days);
     } else if logs_duration.num_seconds() > HOUR_SECONDS {
-        println!("In terms of hours");
+        println!("Analysing in terms of hours...");
         let duration_hours =
             u64::div_ceil(logs_duration.num_seconds() as u64, HOUR_SECONDS as u64) as i64;
 
         logs_aggregate = aggregate_in_terms_of_hours(&log_data, mindt, maxdt, duration_hours);
     } else if logs_duration.num_seconds() > MIN_SECONDS {
-        println!("In terms of minutes");
+        println!("Analysing in terms of minutes...");
         let duration_mins =
             u64::div_ceil(logs_duration.num_seconds() as u64, MIN_SECONDS as u64) as i64;
 
         logs_aggregate = aggregate_in_terms_of_minutes(&log_data, mindt, maxdt, duration_mins);
     } else {
-        println!("In terms of seconds");
+        println!("Analysing in terms of seconds...");
         let duration_secs: i64;
         if logs_duration.subsec_nanos() > 0 {
             duration_secs = logs_duration.num_seconds() + 1;

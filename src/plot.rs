@@ -126,8 +126,6 @@ pub fn plot_combined_bar_chart(
         .label("Counts");
 
     _ = root.present();
-
-    println!("{:?}", combined_loglevel_count);
 }
 
 fn get_tick_size(dt_cat: &DateTimeCat) -> i32 {
