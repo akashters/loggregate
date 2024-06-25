@@ -50,7 +50,7 @@ loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-for
 Running this will generate bar plots and prepares a html file in current directory and you can open it in browser to see the report.
 
 If the program has any problems reading datetime it writes the line it failed to read to =stderr=. You can redirect all the errors to a
-seperate file by adding ~2>errors.txt~ to the end of the command.
+seperate file by adding ~2> errors.txt~ to the end of the command.
 #+BEGIN_SRC bash
-loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log"
+loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log" 2> errors.txt
 #+END_SRC
