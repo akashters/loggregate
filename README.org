@@ -9,9 +9,9 @@ Loggregate can read your log files given a glob pattern and generates a report w
 + You might need to install some basic packages for this tool to work mentioned in =requirements.txt=. They are mentioned with
   software name (arch linux package name & debian package name)
   #+BEGIN_SRC text
-    pkg-config (base-devel / build-essential)
-    libfreetype (freetype2 / libfreetype6-dev)
-    libfontconfig (fontconfig / libfontconfig-dev)
+  pkg-config (base-devel / build-essential)
+  libfreetype (freetype2 / libfreetype6-dev)
+  libfontconfig (fontconfig / libfontconfig-dev)
   #+END_SRC
 
 + Make sure you have rust toolchain installed.
@@ -39,12 +39,18 @@ You can get detailed usage by running =loggregate= with ~--help~ flag.
 
 Say we have log files in =/var/log= ending with =.log= and log statement looks like this
 #+BEGIN_SRC text
-        2015-07-29 17:41:44,747 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 3200
-        2015-07-29 19:04:12,394 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:45307
+2015-07-29 17:41:44,747 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 3200
+2015-07-29 19:04:12,394 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:45307
 #+END_SRC
 then the command looks like
 #+BEGIN_SRC bash
-  loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log"
+loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log"
 #+END_SRC
 
 Running this will generate bar plots and prepares a html file in current directory and you can open it in browser to see the report.
+
+If the program has any problems reading datetime it writes the line it failed to read to =stderr=. You can redirect all the errors to a
+seperate file by adding ~2>errors.txt~ to the end of the command.
+#+BEGIN_SRC bash
+loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log"
+#+END_SRC
