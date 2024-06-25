@@ -54,7 +54,10 @@ pub fn analyse_logs(
             .collect();
         let datetime = match NaiveDateTime::parse_from_str(&datetime_str, datetime_format) {
             Ok(dt) => dt,
-            Err(e) => panic!("{:?}", e),
+            Err(_) => {
+                eprintln!("Error parsing date in line: {}", log);
+                continue;
+            }
         };
 
         let mut loglevel_str = String::new();
