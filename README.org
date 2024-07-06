@@ -8,11 +8,11 @@ Loggregate can read your log files given a glob pattern and generates a report w
 
 + You might need to install some basic packages for this tool to work mentioned in =requirements.txt=. They are mentioned with
   software name (arch linux package name & debian package name)
-  #+BEGIN_QUOTE text
+  #+BEGIN_SRC text
   pkg-config (base-devel / build-essential)
   libfreetype (freetype2 / libfreetype6-dev)
   libfontconfig (fontconfig / libfontconfig-dev)
-  #+END_QUOTE
+  #+END_SRC
 + Make sure you have rust toolchain installed.
 + Go to the releases page and download =loggregate-<version>.tar.gz= along with the =loggregate-<version>.tar.gz.asc= (recommended)
 + You can optionally check the signature of the tarball to verify the authenticity.
@@ -21,21 +21,21 @@ Loggregate can read your log files given a glob pattern and generates a report w
     gpg --recv-key C8B2A95D8D855A9D8C6F0C78BCBCAE31ECE05007
   #+END_SRC
 + Then verify the signature by runnig the below command
-  #+BEGIN_EXAMPLE bash
+  #+BEGIN_SRC bash
   gpg --verify loggregate-<version>.tar.gz.asc loggregate-<version>.tar.gz
-  #+END_EXAMPLE
+  #+END_SRC
   Runnig this should say *Good Signature from "Akash Doppalapudi"*
 + You can skip the signature verification part if you want to though I'd recommned it. Next you need to extract the tar archive.
-  #+BEGIN_EXAMPLE bash
+  #+BEGIN_SRC bash
     tar -xvf loggregate-<version>.tar.gz
-  #+END_EXAMPLE
+  #+END_SRC
 + You can also simply clone this repository and ~cd~ into it but I recommned get the release tarball.
 + Run ~cargo build~. You can use ~--release~ flag to make an optimized release build.
 + Compiled binary can be found inside =target= folder.
 + You can also copy the binary to a location included in $PATH to run it like any other program.
-  #+BEGIN_EXAMPLE bash
+  #+BEGIN_SRC bash
   cp target/release/loggregate /usr/local/bin
-  #+END_EXAMPLE
+  #+END_SRC
   Text loggregate by running ~loggregate -h~
 
 * Usage
