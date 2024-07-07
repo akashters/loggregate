@@ -4,6 +4,13 @@ Aggregates, Analyses and Generates reports from log files.
 
 Loggregate can read your log files given a glob pattern and generates a report with stats based on the logs.
 
+#+BEGIN_HTML
+<img src="https://github.com/akashters/loggregate/assets/127584056/c14c96cb-c854-417f-8c29-a9bb72c38eb8" />
+<img src="https://github.com/akashters/loggregate/assets/127584056/f67c3307-2761-4566-a182-9d1917e972bd" />
+#+END_HTML
+
+I am bad at designing web pages, so any design changes or suggestions are welcome.
+
 * Compile from source
 
 + You might need to install some basic packages for this tool to work mentioned in =requirements.txt=. They are mentioned with
@@ -27,7 +34,7 @@ gpg --verify loggregate-<version>.tar.gz.asc loggregate-<version>.tar.gz
   Runnig this should say *Good Signature from "Akash Doppalapudi"*
 + You can skip the signature verification part if you want to though I'd recommned it. Next you need to extract the tar archive.
 #+BEGIN_SRC bash
-tar -xvf loggregate-<version>.tar.gz
+tar xvf loggregate-<version>.tar.gz
 #+END_SRC
 + You can also simply clone this repository and ~cd~ into it but I recommned get the release tarball.
 + Run ~cargo build~. You can use ~--release~ flag to make an optimized release build.
