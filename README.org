@@ -61,12 +61,12 @@ You can get detailed usage by running =loggregate= with ~--help~ flag.
   | %B    |       July | Full month name.                                                  |
   | %h    |        Jul | Same as =%b=.                                                     |
   | %d    |         08 | Day number (01–31), zero-padded to 2 digits.                      |
-  | %e    |       = 8= | Same as %d but space-padded.                                      |
+  | %e    |          8 | Same as =%d= but space-padded.                                    |
   | %F    | 2001-07-11 | Year-month-day format (ISO 8601). Same as %Y-%m-%d.               |
   | %H    |         00 | Hour number (00–23), zero-padded to 2 digits.                     |
-  | %k    |       = 0= | Same as %H but space-padded.                                      |
+  | %k    |          0 | Same as =%H= but space-padded.                                    |
   | %I    |         12 | Hour number in 12-hour clocks (01–12), zero-padded to 2 digits.   |
-  | %l    |         12 | Same as %I but space-padded.                                      |
+  | %l    |         12 | Same as =%I= but space-padded.                                    |
   | %P    |         am | am or pm in 12-hour clocks.                                       |
   | %p    |         AM | AM or PM in 12-hour clocks.                                       |
   | %M    |         34 | Minute number (00–59), zero-padded to 2 digits.                   |
