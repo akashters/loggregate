@@ -51,15 +51,34 @@ You can get detailed usage by running =loggregate= with ~--help~ flag.
 
 *** Required Args
 
-+ ~--datetime-start~ Starting position of datetime in log statement (0 indexed)
-+ ~--datetime-end~ End position of datetime in log statement (0 indexed)
-+ ~--datetime-format~ Datetime string's format. eg: "%d/%m/&y %H:%M:&S". Use this [[https://docs.rs/chrono/latest/chrono/format/strftime/index.html][guide]] to see how to write datetime format.
-+ ~--loglevel-pos~ Position of start of log level on log line
++ ~--datetime-format~ / ~-d~ Datetime string's format. eg: "%d/%m/%y %H:%M:%S". Refer to the below table to see how to write datetime format.
+  | Spec. |    Example | Description                                                       |
+  |-------+------------+-------------------------------------------------------------------|
+  | %Y    |       2001 | Zero padded year in 4 digits.                                     |
+  | %y    |         01 | The proleptic Gregorian year modulo 100, zero-padded to 2 digits. |
+  | %m    |         07 | Month number (01–12), zero-padded to 2 digits.                    |
+  | %b    |        Jul | Abbreviated month name. Always 3 letters.                         |
+  | %B    |       July | Full month name.                                                  |
+  | %h    |        Jul | Same as =%b=.                                                     |
+  | %d    |         08 | Day number (01–31), zero-padded to 2 digits.                      |
+  | %e    |       = 8= | Same as %d but space-padded.                                      |
+  | %F    | 2001-07-11 | Year-month-day format (ISO 8601). Same as %Y-%m-%d.               |
+  | %H    |         00 | Hour number (00–23), zero-padded to 2 digits.                     |
+  | %k    |       = 0= | Same as %H but space-padded.                                      |
+  | %I    |         12 | Hour number in 12-hour clocks (01–12), zero-padded to 2 digits.   |
+  | %l    |         12 | Same as %I but space-padded.                                      |
+  | %P    |         am | am or pm in 12-hour clocks.                                       |
+  | %p    |         AM | AM or PM in 12-hour clocks.                                       |
+  | %M    |         34 | Minute number (00–59), zero-padded to 2 digits.                   |
+  | %S    |         60 | Second number (00–60), zero-padded to 2 digits.                   |
+
 + You also need to pass file glob pattern as a positional argument
 
 *** Optional Args
 
 + ~--user~ / ~-u~ User can optionally give their name and it will be shown in the report
+
+Supported log level tyes: Emergency, Alert, Critical, Error, Warning/Warn, Notice, Info/Information, Debug and any other type will be considered of type 'Others'
 
 * Example
 
@@ -70,7 +89,7 @@ Say we have log files in =/var/log= ending with =.log= and log statement looks l
 #+END_SRC
 then the command looks like
 #+BEGIN_SRC bash
-loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log"
+loggregate --datetime-format "%Y-%m-%d %H:%M:%S" --user "John Doe" "/var/log/*.log"
 #+END_SRC
 
 Running this will generate bar plots and prepares a html file in current directory and you can open it in browser to see the report.
@@ -78,5 +97,5 @@ Running this will generate bar plots and prepares a html file in current directo
 If the program has any problems reading datetime it writes the line it failed to read to =stderr=. You can redirect all the errors to a
 seperate file by adding ~2> errors.txt~ to the end of the command.
 #+BEGIN_SRC bash
-loggregate --datetime-start 0 --datetime-end 23 --loglevel-pos 26 --datetime-format "%Y-%m-%d %H:%M:%S,%3f" -u "John Doe" "/var/log/*.log" 2> errors.txt
+loggregate -d "%Y-%m-%d %H:%M:%S" -u "John Doe" "/var/log/*.log" 2> errors.txt
 #+END_SRC
