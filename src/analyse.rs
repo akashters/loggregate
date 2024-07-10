@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 use chrono::NaiveDateTime;
-use std::{collections::HashMap, collections::HashSet, usize};
+use dtfmt::dt_fmt_to_regex;
+use loglevel::loglevel_regex_pattern;
+use std::{collections::HashMap, collections::HashSet};
 
 mod aggregate;
 pub mod calc;
@@ -35,23 +37,21 @@ const DAY_SECONDS: i64 = HOUR_SECONDS * 24;
 const MONTH_SECONDS: i64 = DAY_SECONDS * 31;
 const YEAR_SECONDS: i64 = MONTH_SECONDS * 12;
 
-pub fn analyse_logs(
-    log_lines: &Vec<String>,
-    datetime_start_pos: i32,
-    datetime_end_pos: i32,
-    datetime_format: &str,
-    loglevel_pos: i32,
-) -> LogsAggregate {
+pub fn analyse_logs(log_lines: &Vec<String>, datetime_format: &str) -> LogsAggregate {
     let mut log_data: Vec<DateTimeLogLevelMap> = Vec::new();
     let mut unq_datetimes: HashSet<NaiveDateTime> = HashSet::new();
     let logs_aggregate: LogsAggregate;
 
     for log in log_lines {
-        let datetime_str: String = log
-            .chars()
-            .skip(datetime_start_pos as usize)
-            .take((datetime_end_pos - datetime_start_pos) as usize)
-            .collect();
+        let datetime_regex = dt_fmt_to_regex(datetime_format);
+        let datetime_str = match datetime_regex.captures(&log) {
+            Some(caps) => caps.get(0).unwrap().as_str().to_owned(),
+            _ => {
+                eprintln!("Error finding date with given format in line: {}", log);
+                continue;
+            }
+        };
+
         let datetime = match NaiveDateTime::parse_from_str(&datetime_str, datetime_format) {
             Ok(dt) => dt,
             Err(_) => {
@@ -60,13 +60,11 @@ pub fn analyse_logs(
             }
         };
 
-        let mut loglevel_str = String::new();
-        for c in log.chars().skip(loglevel_pos as usize) {
-            if c == ' ' {
-                break;
-            }
-            loglevel_str = format!("{}{}", loglevel_str, c);
-        }
+        let loglevel_str = match loglevel_regex_pattern().captures(&log) {
+            Some(caps) => caps.get(0).unwrap().as_str().to_owned(),
+            _ => "others".to_owned(),
+        };
+
         let loglevel = to_loglevel(&loglevel_str);
 
         unq_datetimes.insert(datetime);

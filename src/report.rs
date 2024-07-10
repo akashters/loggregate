@@ -143,7 +143,10 @@ fn prepare_placeholder_map(
             "BY_USER",
             match user {
                 None => "".to_owned(),
-                Some(user) => format!(" by {}", user),
+                Some(user) => match user.as_str() {
+                    "" => "".to_owned(),
+                    _ => format!(" by {}", user),
+                },
             },
         ),
     ]);

@@ -37,13 +37,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let no_of_logs = log_lines.len() as i32;
     println!("Completed reading the files");
 
-    let logs_aggregate = analyse_logs(
-        &log_lines,
-        input.datetime_start_pos,
-        input.datetime_end_pos,
-        &input.datetime_str_format,
-        input.loglevel_position,
-    );
+    println!("Analysing the logs..");
+    let logs_aggregate = analyse_logs(&log_lines, &input.datetime_str_format);
 
     let tmp_loggregate_dir = prepare_tmp_loggregate_dir();
     let plots_gen_dir = prepare_plots_gen_dir(&tmp_loggregate_dir);

@@ -2,6 +2,8 @@
 
 use std::collections::HashMap;
 
+use regex::Regex;
+
 #[derive(Debug, Hash, PartialEq, Eq, Copy, Clone)]
 pub enum LogLevel {
     Emergency,
@@ -57,4 +59,11 @@ pub fn make_loglevel_count_vec_map() -> HashMap<LogLevel, Vec<i32>> {
         (LogLevel::Emergency, Vec::new()),
         (LogLevel::Others, Vec::new()),
     ]);
+}
+
+pub fn loglevel_regex_pattern() -> Regex {
+    return Regex::new(
+        r"(?i)(info|information|debug|warning|warn|error|notice|critical|alert|emergency)",
+    )
+    .unwrap();
 }
