@@ -14,12 +14,12 @@ pub struct Cli {
     #[arg(short, long = "user", required = false)]
     pub user: Option<String>,
 
-    /// File patter to read log files eg: "./*.log"
-    pub file_pattern: String,
+    /// Glob pattern to read log files eg: "./*.log"
+    pub glob_pattern: String,
 }
 
 pub fn validate_input(input: &Cli) -> Result<bool, &str> {
-    if input.file_pattern.is_empty() {
+    if input.glob_pattern.is_empty() {
         return Err("No file pattern given, give a valid file pattern");
     }
 

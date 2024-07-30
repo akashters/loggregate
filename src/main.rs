@@ -33,7 +33,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
 
     println!("Reading the log files...");
-    let no_of_files = read_logs(&input.file_pattern, &mut log_lines);
+    let no_of_files = read_logs(&input.glob_pattern, &mut log_lines);
     let no_of_logs = log_lines.len() as i32;
     println!("Completed reading the files");
 
