@@ -42,9 +42,10 @@ pub fn analyse_logs(log_lines: &Vec<String>, datetime_format: &str) -> LogsAggre
     let mut unq_datetimes: HashSet<NaiveDateTime> = HashSet::new();
     let logs_aggregate: LogsAggregate;
 
+    let dt_regex = dt_fmt_to_regex(datetime_format);
+    let ll_regex = loglevel_regex_pattern();
     for log in log_lines {
-        let datetime_regex = dt_fmt_to_regex(datetime_format);
-        let datetime_str = match datetime_regex.captures(&log) {
+        let datetime_str = match dt_regex.captures(&log) {
             Some(caps) => caps.get(0).unwrap().as_str().to_owned(),
             _ => {
                 eprintln!("Error finding date with given format in line: {}", log);
@@ -60,7 +61,7 @@ pub fn analyse_logs(log_lines: &Vec<String>, datetime_format: &str) -> LogsAggre
             }
         };
 
-        let loglevel_str = match loglevel_regex_pattern().captures(&log) {
+        let loglevel_str = match ll_regex.captures(&log) {
             Some(caps) => caps.get(0).unwrap().as_str().to_owned(),
             _ => "others".to_owned(),
         };
