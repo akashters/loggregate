@@ -14,7 +14,6 @@ pub fn generate_html_report(
     let mut html_text: String = include_str!("../assets/index.html").to_owned();
     let html_report_path = format!("{}", report_dir) + "/report.html";
 
-    html_text = html_text.replace("{#NO_OF_FILES#}", &format!("{}", no_of_files));
     let value_map = prepare_placeholder_map(no_of_files, no_of_logs, combined_loglevel_count, user);
 
     html_text = replace_placeholders(html_text, &value_map);
